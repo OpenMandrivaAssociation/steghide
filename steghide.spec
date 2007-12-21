@@ -19,6 +19,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	doxygen
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.7
+BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 %description
 Steghide is a steganography program which embeds a secret message
