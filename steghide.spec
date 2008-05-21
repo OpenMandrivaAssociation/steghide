@@ -1,7 +1,7 @@
 Summary:	A steganography program
 Name:		steghide
 Version:	0.5.1
-Release:	%mkrel 7
+Release:	%mkrel 8
 License:	GPL
 Group:		File tools
 URL:		http://steghide.sourceforge.net/
@@ -11,15 +11,18 @@ Patch1:		steghide-0.5.1-gcc4.diff
 Patch2:		steghide-0.5.1-passphrase-file.diff
 Patch3:		steghide-0.5.1-gcc4_1.diff
 Patch4:		steghide-0.5.1-libtool.diff
-BuildRequires:	libmhash-devel
-BuildRequires:	libmcrypt-devel
-BuildRequires:	libtool-devel
-BuildRequires:	zlib-devel
-BuildRequires:	libjpeg-devel
-BuildRequires:	doxygen
+Patch5:		steghide-0.5.1-gcc43.patch
 BuildRequires:	autoconf2.5
 BuildRequires:	automake1.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}-buildroot
+BuildRequires:	doxygen
+BuildRequires:	gettext-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libmcrypt-devel >= 2.5.8
+BuildRequires:	libmhash-devel
+BuildRequires:	libtool
+BuildRequires:	libtool-devel
+BuildRequires:	zlib-devel
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 Steghide is a steganography program which embeds a secret message
@@ -39,6 +42,7 @@ embed data in BMP, WAV and AU files.
 %patch2 -p1
 %patch3 -p0
 %patch4 -p1
+%patch5 -p1 
 
 %build
 rm -f configure
@@ -49,6 +53,7 @@ libtoolize --force --copy; aclocal-1.7 -I m4; autoheader; automake-1.7 --add-mis
 
 %make
 
+%check
 make check
 
 %install
@@ -72,5 +77,3 @@ rm -rf %{buildroot}
 %doc BUGS CREDITS HISTORY INSTALL README TODO html
 %{_bindir}/steghide
 %{_mandir}/man1/steghide.1*
-
-
