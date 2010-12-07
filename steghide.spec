@@ -1,7 +1,7 @@
 Summary:	A steganography program
 Name:		steghide
 Version:	0.5.1
-Release:	%mkrel 11
+Release:	%mkrel 12
 License:	GPLv2+
 Group:		File tools
 URL:		http://steghide.sourceforge.net/
