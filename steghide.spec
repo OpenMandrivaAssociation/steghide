@@ -1,7 +1,7 @@
 Summary:	A steganography program
 Name:		steghide
 Version:	0.5.1
-Release:	%mkrel 12
+Release:	%mkrel 13
 License:	GPLv2+
 Group:		File tools
 URL:		http://steghide.sourceforge.net/
@@ -13,7 +13,7 @@ Patch3:		steghide-0.5.1-gcc4_1.diff
 Patch4:		steghide-0.5.1-libtool.diff
 Patch5:		steghide-0.5.1-gcc43.patch
 BuildRequires:	autoconf2.5
-BuildRequires:	automake1.7
+BuildRequires:	automake
 BuildRequires:	doxygen
 BuildRequires:	gettext-devel
 BuildRequires:	libjpeg-devel
@@ -46,7 +46,7 @@ embed data in BMP, WAV and AU files.
 
 %build
 rm -f configure
-libtoolize --force --copy; aclocal-1.7 -I m4; autoheader; automake-1.7 --add-missing --copy --foreign; autoconf
+libtoolize --force --copy; aclocal -I m4; autoheader; automake --add-missing --copy --foreign; autoconf
 #touch NEWS ChangeLog AUTHORS
 
 %configure2_5x
