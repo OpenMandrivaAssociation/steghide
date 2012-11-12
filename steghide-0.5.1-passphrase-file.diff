@@ -1,0 +1,107 @@
+diff -p -up steghide-0.5.1/src/Arguments.cc.passphrase steghide-0.5.1/src/Arguments.cc
+--- steghide-0.5.1/src/Arguments.cc.passphrase	2009-06-23 04:19:02.000000000 +0200
++++ steghide-0.5.1/src/Arguments.cc	2009-06-23 04:22:11.000000000 +0200
+@@ -20,6 +20,7 @@
+ 
+ #include <cstring>
+ #include <iostream>
++#include <fstream>
+ #include <string>
+ 
+ #include "MCryptPP.h"
+@@ -28,6 +29,8 @@
+ #include "error.h"
+ #include "msg.h"
+ 
++using namespace std;
++
+ float Arguments::Default_Goal = 100.0 ;
+ 
+ // the global Arguments object
+@@ -322,11 +325,44 @@ bool Arguments::parse_StgFn (ArgIt& cura
+ 	return found ;
+ }
+ 
++bool Arguments::parse_PassphraseFile (ArgIt& curarg)
++{
++       bool found = false ;
++
++       if (*curarg == "-pf" || *curarg == "--passphrase-file") {
++               if (Passphrase.is_set()) {
++                       throw ArgError (_("the passphrase is already set.")) ;
++               }
++
++               if (++curarg == TheArguments.end()) {
++                       throw ArgError (_("the \"%s\" argument must be followed by the passphrase filename."), (curarg - 1)->c_str());
++               }
++
++               string s;
++               if( *curarg == "-" ) { // - means standard input
++                 cin >> s;
++               } else {
++                 ifstream passphraseFile(curarg->c_str());
++                 if( !passphraseFile ) {
++                   throw ArgError (_("the passphrase could not be read from file \"%s\"."), curarg->c_str());
++                 }
++                 passphraseFile >> s;
++                 passphraseFile.close();
++               }
++               Passphrase.setValue (s);
++               found = true ;
++               curarg++ ;
++       }
++
++       return found ;
++}
++
+ bool Arguments::parse_Passphrase (ArgIt& curarg)
+ {
+ 	bool found = false ;
+ 
+-	if (*curarg == "-p" || *curarg == "--passphrase") {
++	found = parse_PassphraseFile( curarg );
++	if (!found && (*curarg == "-p" || *curarg == "--passphrase")) {
+ 		if (Passphrase.is_set()) {
+ 			throw ArgError (_("the passphrase argument can be used only once.")) ;
+ 		}
+diff -p -up steghide-0.5.1/src/Arguments.h.passphrase steghide-0.5.1/src/Arguments.h
+--- steghide-0.5.1/src/Arguments.h.passphrase	2009-06-23 04:19:02.000000000 +0200
++++ steghide-0.5.1/src/Arguments.h	2009-06-23 04:19:02.000000000 +0200
+@@ -124,6 +124,7 @@ class Arguments {
+ 	bool parse_ExtFn (ArgIt& curarg) ;
+ 	bool parse_CvrFn (ArgIt& curarg) ;
+ 	bool parse_StgFn (ArgIt& curarg) ;
++	bool parse_PassphraseFile (ArgIt& curarg) ;
+ 	bool parse_Passphrase (ArgIt& curarg) ;
+ 	bool parse_Checksum (ArgIt& curarg) ;
+ 	bool parse_Compression (ArgIt& curarg) ;
+diff -p -up steghide-0.5.1/src/Session.cc.passphrase steghide-0.5.1/src/Session.cc
+--- steghide-0.5.1/src/Session.cc.passphrase	2003-09-29 12:07:10.000000000 +0200
++++ steghide-0.5.1/src/Session.cc	2009-06-23 04:19:02.000000000 +0200
+@@ -260,6 +260,8 @@ void Session::printHelp ()
+ 		"   -cf <filename>        embed into the file <filename>\n"
+ 		" -p, --passphrase        specify passphrase\n"
+ 		"   -p <passphrase>       use <passphrase> to embed data\n"
++		" -pf, --passphrase-file  read passphrase from the specified file\n"
++		"   -pf <filename>        \n"
+ 		" -sf, --stegofile        select stego file\n"
+ 		"   -sf <filename>        write result to <filename> instead of cover-file\n"
+ 		" -e, --encryption        select encryption parameters\n"
+@@ -279,6 +281,8 @@ void Session::printHelp ()
+ 		"   -sf <filename>        extract data from <filename>\n"
+ 		" -p, --passphrase        specify passphrase\n"
+ 		"   -p <passphrase>       use <passphrase> to extract data\n"
++		" -pf, --passphrase-file  read passphrase from the specified file\n"
++		"   -pf <filename>        \n"
+ 		" -xf, --extractfile      select file name for extracted data\n"
+ 		"   -xf <filename>        write the extracted data to <filename>\n"
+ 		" -f, --force             overwrite existing files\n"
+@@ -288,6 +292,8 @@ void Session::printHelp ()
+ 		"\noptions for the info command:\n"
+ 		" -p, --passphrase        specify passphrase\n"
+ 		"   -p <passphrase>       use <passphrase> to get info about embedded data\n"
++		" -pf, --passphrase-file  read passphrase from the specified file\n"
++		"   -pf <filename>        \n"
+ 
+ 		"\nTo embed emb.txt in cvr.jpg: steghide embed -cf cvr.jpg -ef emb.txt\n"
+ 		"To extract embedded data from stg.jpg: steghide extract -sf stg.jpg\n")) ;

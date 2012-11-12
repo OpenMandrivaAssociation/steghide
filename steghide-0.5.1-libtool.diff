@@ -1,0 +1,21 @@
+diff -Naur steghide-0.5.1/configure.in steghide-0.5.1.oden/configure.in
+--- steghide-0.5.1/configure.in	2003-10-15 09:48:52.000000000 +0200
++++ steghide-0.5.1.oden/configure.in	2006-01-26 14:43:34.000000000 +0100
+@@ -9,6 +9,7 @@
+ AC_PROG_INSTALL
+ AC_PROG_AWK
+ AC_PROG_LN_S
++AC_PROG_LIBTOOL
+ 
+ dnl GNU gettext
+ AC_CHECK_FUNCS(strchr)
+diff -Naur steghide-0.5.1/src/Makefile.am steghide-0.5.1.oden/src/Makefile.am
+--- steghide-0.5.1/src/Makefile.am	2006-01-26 14:44:41.000000000 +0100
++++ steghide-0.5.1.oden/src/Makefile.am	2006-01-26 14:43:57.000000000 +0100
+@@ -33,5 +33,5 @@
+ WavPCMSampleValue.cc error.cc main.cc msg.cc SMDConstructionHeuristic.cc
+ LIBS = @LIBINTL@ @LIBS@
+ localedir = $(datadir)/locale
+-LIBTOOL = $(SHELL) libtool --tag=CXX
++LIBTOOL = libtool --tag=CXX
+ MAINTAINERCLEANFILES = Makefile.in
