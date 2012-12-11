@@ -77,3 +77,63 @@ rm -rf %{buildroot}
 %doc BUGS CREDITS HISTORY INSTALL README TODO html
 %{_bindir}/steghide
 %{_mandir}/man1/steghide.1*
+
+
+%changelog
+* Mon Jan 03 2011 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-13mdv2011.0
++ Revision: 627838
+- don't force the usage of automake1.7
+
+* Wed Dec 08 2010 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-12mdv2011.0
++ Revision: 614980
+- the mass rebuild of 2010.1 packages
+
+* Mon Aug 17 2009 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-11mdv2010.0
++ Revision: 417298
+- rebuilt against libjpeg v7
+
+* Tue Jun 23 2009 Jérôme Brenier <incubusss@mandriva.org> 0.5.1-10mdv2010.0
++ Revision: 388123
+- rediff P2
+- fix license tag
+
+* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 0.5.1-9mdv2009.0
++ Revision: 269368
+- rebuild early 2009.0 package (before pixel changes)
+
+* Wed May 21 2008 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-8mdv2009.0
++ Revision: 209739
+- added a gcc43 patch from fedora
+
+* Fri Dec 21 2007 Olivier Blin <oblin@mandriva.com> 0.5.1-7mdv2008.1
++ Revision: 136523
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Wed Jan 17 2007 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-7mdv2007.0
++ Revision: 109872
+- Import steghide
+
+* Thu Jan 26 2006 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-7mdk
+- fix deps
+
+* Thu Jan 26 2006 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-6mdk
+- added one gcc4 fix in the debian patch by Gwenole Beauchesne
+
+* Thu Jan 26 2006 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-5mdk
+- added one gcc4 patch by Michael Scherer (P3)
+- added libtool fixes (P4)
+
+* Sun Jan 08 2006 Oden Eriksson <oeriksson@mandriva.com> 0.5.1-4mdk
+- added one gcc4 patch by debian (P1)
+- added P2 by Klaus Holler
+- fix autofoo
+- fix deps
+- run the test suite
+
+* Sat Jul 17 2004 Michael Scherer <misc@mandrake.org> 0.5.1-3mdk 
+- rebuild for new gcc ( patch 0 )
+
