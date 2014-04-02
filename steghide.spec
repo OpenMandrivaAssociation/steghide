@@ -18,7 +18,7 @@ BuildRequires:	doxygen
 BuildRequires:	gettext-devel
 BuildRequires:	jpeg-devel
 BuildRequires:	libmcrypt-devel >= 2.5.8
-BuildRequires:	libmhash-devel
+BuildRequires:	mhash-devel
 BuildRequires:	libtool
 BuildRequires:	libtool-devel
 BuildRequires:	zlib-devel
