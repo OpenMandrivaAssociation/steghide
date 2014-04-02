@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 Summary:	A steganography program
 Name:		steghide
 Version:	0.5.1
