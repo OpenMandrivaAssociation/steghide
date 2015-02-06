@@ -3,7 +3,7 @@
 Summary:	A steganography program
 Name:		steghide
 Version:	0.5.1
-Release:	14
+Release:	15
 License:	GPLv2+
 Group:		File tools
 URL:		http://steghide.sourceforge.net/
