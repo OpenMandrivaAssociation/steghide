@@ -6,7 +6,7 @@ Version:	0.5.1
 Release:	15
 License:	GPLv2+
 Group:		File tools
-URL:		http://steghide.sourceforge.net/
+URL:		https://steghide.sourceforge.net/
 Source0:	%{name}-%{version}.tar.bz2
 Patch0:		steghide-0.5.1-gcc34.patch
 Patch1:		steghide-0.5.1-gcc4.diff
