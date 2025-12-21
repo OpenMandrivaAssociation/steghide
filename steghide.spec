@@ -14,6 +14,8 @@ Patch2:		steghide-0.5.1-passphrase-file.diff
 Patch3:		steghide-0.5.1-gcc4_1.diff
 Patch4:		steghide-0.5.1-libtool.diff
 Patch5:		steghide-0.5.1-gcc43.patch
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
 BuildRequires:	autoconf2.5
 BuildRequires:	automake
 BuildRequires:	doxygen
